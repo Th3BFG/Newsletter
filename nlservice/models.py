@@ -1,10 +1,11 @@
 import datetime
 from nlservice import db
+from flask import jsonify
 
 class Subscriber(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	email = db.Column(db.String(120), index=True, unique=True)
-	datesubbed = db.Column(db.String(12), index=True, unique=False)
+	id = db.Column(db.Integer, primary_key = True)
+	email = db.Column(db.String(120), index = True, unique = True)
+	datesubbed = db.Column(db.String(12), index = True, unique = False)
 
 	# Add a user to the database
 	@staticmethod
@@ -15,14 +16,25 @@ class Subscriber(db.Model):
 		db.session.add(sub)
 		db.session.commit()
 
+	# Remove a user to the database
+	@staticmethod
+	def remove(address):
+		sub = Subscriber.query.filter_by(email = address).first()
+		if sub is not None:
+			# TODO: Add error handling
+			db.session.delete(sub)
+			db.session.commit()
+
 	# List all subscribers
 	@staticmethod
 	def list():
+		# TODO: this will require a token check before making the query
 		subs = Subscriber.query.all()
+		# TODO: Return subscriber list as JSON
 		text = ''
 		for sub in subs:
-			text += sub.email + ' '
+			text += str(sub) +'<br/>'
 		return text
 
-	def __repr__(self):
-		return '<%r subscribed on %r>' % (self.email, self.datesubbed)
+	def __str__(self):
+		return "%s subscribed on %s" % (self.email, self. datesubbed)
