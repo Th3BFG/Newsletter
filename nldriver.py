@@ -2,24 +2,20 @@ import time
 import logging
 import threading
 
-# The driver for the service. 
-# Maintains the subscriber service and sending of newsletters
+# The driver for the newsletter mailer. 
+# Responsible for the creation and sending of newsletters.
+		# Steps to mail:
+		# 1. Construct newsletter
+		# 2. Fetch subscriber list
+		# 3. Connect to mail server
+		# 4. Send message
+		# 5. Clean up
 class NewsletterDriver:
-	# Constants
-
 	# ctor
 	def __init__(self):
-		logging.info('Starting Newsletter Driver')
-		# Set condition for shutdown
-		self.condition = threading.Condition()
-		# Create Subscriber Service
-		# Start Newsletter Sending Loop
+		logging.info('Constructing newsletter')
+		
 
-	# Shutdown
-	def shutdown(self):
-		with self.condition:
-			logging.info('Begining Shutdown Process')
-			self.run = False
-			logging.info('Notifying Threads')
-			self.condition.notifyAll()
+
+
 
