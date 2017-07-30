@@ -1,5 +1,3 @@
-
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -94,3 +92,5 @@ ENV/
 app.cfg
 *.cfg
 
+# Database Files
+*.db
